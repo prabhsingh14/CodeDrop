@@ -5,6 +5,11 @@ A **scalable backend system** inspired by Vercel, enhanced with a unique feature
 
 ---
 
+## 🏗 Architecture
+<img width="2553" height="709" alt="architecture" src="https://github.com/user-attachments/assets/55553814-4c6f-48b4-ae5b-8f9a784d7eb0" />
+
+---
+
 ## 🛠 Tech Stack
 
 - **Node.js** – Core backend logic
