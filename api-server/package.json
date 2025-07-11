@@ -17,10 +17,12 @@
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "folder-hash": "^4.1.1",
+    "fs": "^0.0.1-security",
     "ioredis": "^5.6.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.3",
     "multer": "^2.0.1",
+    "path": "^0.12.7",
     "random-word-slugs": "^0.1.7",
     "socket.io": "^4.8.1"
   }

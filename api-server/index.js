@@ -6,6 +6,7 @@ import { Socket } from 'socket.io';
 import { connectDB } from './database/connect.js';
 import dotenv from 'dotenv';
 import authRoutes from './routes/user.routes.js';
+import uploadRoutes from './routes/upload.route.js';
 dotenv.config();
 
 const app = express();
@@ -40,7 +41,10 @@ const config = {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/deploy', uploadRoutes);
+
 app.post("/project", async (req, res) => {
     const { gitURL } = req.body;
     const projectSlug = generateSlug();
