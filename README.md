@@ -1,29 +1,74 @@
-# 🚀 Vercel Backend Clone
+# 🚀 CodeDrop: Deployment Engine
 
-A backend infrastructure clone of Vercel – built to simulate scalable deployment pipelines for frontend projects using containerization, queuing, and cloud-hosted services.
+A **scalable backend system** inspired by Vercel, enhanced with a unique feature:  
+📦 Upload any `.zip` folder → ⚙️ Auto-build → 🌐 Deploy to subdomain → 🔐 Control visibility (public/private)
 
 ---
 
 ## 🛠 Tech Stack
 
-- **Node.js** – Core API logic and services
-- **Docker** – Containerized build & deployment pipeline
-- **Redis** – In-memory queue for async job processing
-- **AWS** – Infrastructure for deployment, storage, and scalability
+- **Node.js** – Core backend logic
+- **Docker** – Containerized build & deploy
+- **Redis** – Async job queue for processing builds
+- **MongoDB** – Stores deployment metadata and visibility state
+- **AWS ECS** – Serverless container execution for isolated builds
+- **JWT Auth** – Authenticated access to private deployments
+- **Multer** – Handles `.zip` uploads for user projects
 
 ---
 
-## 📦 Features
+## 📦 Core Features
 
-- **🔄 Git Integration**: Automatically trigger builds from Git webhooks.
-- **📦 Dockerized Builds**: Each project is built in an isolated Docker container to ensure environment parity and security.
-- **🧵 Redis Queue System**: Build and deploy processes are managed using Redis-based asynchronous job queues.
-- **📡 Dynamic Routing**: Every deployment gets a unique, dynamically routed endpoint.
-- **☁️ Cloud Hosted**: Mimics production-level infrastructure using AWS services (EC2, S3, etc).
+### 🔧 Project Deployment
+- Upload `.zip` frontend → system builds it inside Docker container
+- Skips unchanged files using **content hashing**
+- Deploys automatically to a live subdomain (e.g., `project.localhost:8000`)
+
+### 🧠 Smart Build Diffing
+- Avoids redundant builds by comparing file hashes with previous versions
+
+### 🌐 Dynamic Subdomain Proxy
+- Reverse proxy maps subdomains to correct project folders
+- JWT protection for private deployments
+
+### 🔐 Private/Public Access Control
+- Easily toggle a project’s visibility with a secure API endpoint
+
+### 🔄 Git Integration  
+- Trigger builds directly from GitHub webhooks
+
+### 📦 Dockerized Builds  
+- Each project is built in an isolated Docker container to ensure environment parity and security.
+
+### 🧵 Redis Queue System  
+- Asynchronous build execution using Redis-backed task queue
+
+### 📡 Dynamic Routing  
+- All projects served on their own unique subdomain for instant access
+
+### ☁️ Cloud Hosted (Infra-ready)
+- Architecture mimics real-world scale using AWS ECS, S3, and EC2
 
 ---
 
-## 🚧 Architecture Overview
+## 📁 Folder Structure
+- /api-server → Auth, deployment logic, queue trigger
+- /build-server → Docker builder image, file extraction, build
+- /s3-reverse-proxy → Serves deployments by subdomain, with auth
 
-```txt
-Client Repo Push --> Git Webhook --> Clone Repo --> Queue Build Job --> Docker Container Build --> Deploy to Cloud --> Return Live URL
+---
+
+## 🧪 Getting Started (Local Dev)
+
+```bash
+# 1. Install dependencies
+cd api-server && npm install
+cd build-server && npm install
+cd s3-reverse-proxy && npm install
+
+# 2. Set up your .env files with Mongo, Redis, AWS keys
+
+# 3. Start the servers
+cd s3-reverse-proxy && npm run dev     # Serve deployments
+cd api-server && npm run dev           # Handle uploads + deploy queue
+```
