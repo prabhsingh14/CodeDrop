@@ -1,4 +1,4 @@
-# 🚀 CodeDrop: Vercel-Inspired Deployment Engine
+# 🚀 CodeDrop: Deployment Engine
 
 A **scalable backend system** inspired by Vercel, enhanced with a unique feature:  
 📦 Upload any `.zip` folder → ⚙️ Auto-build → 🌐 Deploy to subdomain → 🔐 Control visibility (public/private)
