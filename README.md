@@ -1,7 +1,7 @@
 # 🚀 CodeDrop: Vercel-Inspired Deployment Engine
 
 A **scalable backend system** inspired by Vercel, enhanced with a unique feature:  
-📦 Upload any `.zip` folder → ⚙️ Auto-build → 🌐 Deploy to subdomain → 🔐 Control visibility (public/private).
+📦 Upload any `.zip` folder → ⚙️ Auto-build → 🌐 Deploy to subdomain → 🔐 Control visibility (public/private)
 
 ---
 
@@ -9,71 +9,66 @@ A **scalable backend system** inspired by Vercel, enhanced with a unique feature
 
 - **Node.js** – Core backend logic
 - **Docker** – Containerized build & deploy
-- **Redis** – Async job queue (build + deployment)
-- **MongoDB** – Deployment metadata store
-- **AWS ECS** – Container orchestration (build tasks)
-- **JWT Auth** – Access control for private builds
-- **Multer** – File uploads
+- **Redis** – Async job queue for processing builds
+- **MongoDB** – Stores deployment metadata and visibility state
+- **AWS ECS** – Serverless container execution for isolated builds
+- **JWT Auth** – Authenticated access to private deployments
+- **Multer** – Handles `.zip` uploads for user projects
 
 ---
 
 ## 📦 Core Features
 
 ### 🔧 Project Deployment
-- Upload `.zip` frontend → system builds it in Docker
-- Only changed files are rebuilt (via content hashing)
-- Auto-deploy to live subdomain (e.g., `yourapp.localhost:8000`)
+- Upload `.zip` frontend → system builds it inside Docker container
+- Skips unchanged files using **content hashing**
+- Deploys automatically to a live subdomain (e.g., `project.localhost:8000`)
 
 ### 🧠 Smart Build Diffing
-- Skips unchanged files for blazing-fast rebuilds
+- Avoids redundant builds by comparing file hashes with previous versions
 
 ### 🌐 Dynamic Subdomain Proxy
-- Custom reverse proxy maps requests to correct deployment folder
+- Reverse proxy maps subdomains to correct project folders
+- Optional JWT protection for private deployments
 
 ### 🔐 Private/Public Access Control
-- Toggle whether your deployed project is publicly visible or requires JWT-based auth
+- Easily toggle a project’s visibility with a secure API endpoint
 
-### 🔄 Git Integration: 
-- Automatically trigger builds from Git webhooks.
+### 🔄 Git Integration  
+- (Optional) Trigger builds directly from GitHub webhooks (extensible)
 
-### 📦 Dockerized Builds: 
-- Each project is built in an isolated Docker container to ensure environment parity and security.
+### 📦 Dockerized Builds  
+- Each build runs in a **sandboxed container** for full isolation
 
-### 🧵 Redis Queue System: 
-- Build and deploy processes are managed using Redis-based asynchronous job queues.
+### 🧵 Redis Queue System  
+- Asynchronous build execution using Redis-backed task queue
 
-###📡 Dynamic Routing: 
-- Every deployment gets a unique, dynamically routed endpoint.
+### 📡 Dynamic Routing  
+- All projects served on their own unique subdomain for instant access
 
-###☁️ Cloud Hosted: 
-- Mimics production-level infrastructure using AWS services (EC2, S3, etc).
-
-### 📁 Folder Structure
-- `/api-server` → Auth, deployment logic, queue trigger
-- `/build-server` → Docker builder image, file extraction, build
-- `/s3-reverse-proxy` → Serves deployments by subdomain, with auth
+### ☁️ Cloud Hosted (Infra-ready)
+- Architecture mimics real-world scale using AWS ECS, S3, and EC2
 
 ---
 
-## 🔮 Unique Feature: Zip-to-Live Deployment Engine
-
-Unlike Vercel (which only supports Git-based triggers),  
-this system allows developers to:
-
-- Directly upload `.zip` builds
-- Auto-deploy them on the fly
-- Protect them with **JWT-auth gated subdomains**
+## 📁 Folder Structure
+- /api-server → Auth, deployment logic, queue trigger
+- /build-server → Docker builder image, file extraction, build
+- /s3-reverse-proxy → Serves deployments by subdomain, with auth
 
 ---
 
 ## 🧪 Getting Started (Local Dev)
 
 ```bash
-# Install dependencies
+# 1. Install dependencies
 cd api-server && npm install
 cd build-server && npm install
 cd s3-reverse-proxy && npm install
 
-# Start reverse proxy
-cd s3-reverse-proxy && npm run dev
+# 2. Set up your .env files with Mongo, Redis, AWS keys
+
+# 3. Start the servers
+cd s3-reverse-proxy && npm run dev     # Serve deployments
+cd api-server && npm run dev           # Handle uploads + deploy queue
 ```
