@@ -43,7 +43,7 @@ A **scalable backend system** inspired by Vercel, enhanced with a unique feature
 - Build and deploy processes are managed using Redis-based asynchronous job queues.
 
 ###📡 Dynamic Routing: 
- Every deployment gets a unique, dynamically routed endpoint.
+- Every deployment gets a unique, dynamically routed endpoint.
 
 ###☁️ Cloud Hosted: 
 - Mimics production-level infrastructure using AWS services (EC2, S3, etc).
