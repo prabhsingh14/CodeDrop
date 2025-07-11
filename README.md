@@ -33,6 +33,21 @@ A **scalable backend system** inspired by Vercel, enhanced with a unique feature
 ### 🔐 Private/Public Access Control
 - Toggle whether your deployed project is publicly visible or requires JWT-based auth
 
+### 🔄 Git Integration: 
+- Automatically trigger builds from Git webhooks.
+
+### 📦 Dockerized Builds: 
+- Each project is built in an isolated Docker container to ensure environment parity and security.
+
+### 🧵 Redis Queue System: 
+- Build and deploy processes are managed using Redis-based asynchronous job queues.
+
+###📡 Dynamic Routing: 
+ Every deployment gets a unique, dynamically routed endpoint.
+
+###☁️ Cloud Hosted: 
+- Mimics production-level infrastructure using AWS services (EC2, S3, etc).
+
 ### 📁 Folder Structure
 - `/api-server` → Auth, deployment logic, queue trigger
 - `/build-server` → Docker builder image, file extraction, build
