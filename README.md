@@ -29,16 +29,16 @@ A **scalable backend system** inspired by Vercel, enhanced with a unique feature
 
 ### 🌐 Dynamic Subdomain Proxy
 - Reverse proxy maps subdomains to correct project folders
-- Optional JWT protection for private deployments
+- JWT protection for private deployments
 
 ### 🔐 Private/Public Access Control
 - Easily toggle a project’s visibility with a secure API endpoint
 
 ### 🔄 Git Integration  
-- (Optional) Trigger builds directly from GitHub webhooks (extensible)
+- Trigger builds directly from GitHub webhooks
 
 ### 📦 Dockerized Builds  
-- Each build runs in a **sandboxed container** for full isolation
+- Each project is built in an isolated Docker container to ensure environment parity and security.
 
 ### 🧵 Redis Queue System  
 - Asynchronous build execution using Redis-backed task queue
