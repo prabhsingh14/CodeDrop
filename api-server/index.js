@@ -3,6 +3,10 @@ import { generateSlug } from 'random-word-slugs';
 import { ECSClient, RunTaskCommand } from '@aws-sdk/client-ecs';
 import Redis from 'ioredis';
 import { Socket } from 'socket.io';
+import { connectDB } from './database/connect.js';
+import dotenv from 'dotenv';
+import authRoutes from './routes/user.routes.js';
+dotenv.config();
 
 const app = express();
 const port = 9000;
@@ -35,7 +39,8 @@ const config = {
 }
 
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: true }));
+app.use('/api/v1/auth', authRoutes);
 app.post("/project", async (req, res) => {
     const { gitURL } = req.body;
     const projectSlug = generateSlug();
